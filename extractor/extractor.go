@@ -3,6 +3,7 @@ package main
 import (
 	"net"
 	"log"
+	"fmt"
 )
 
 func main() {
@@ -12,18 +13,13 @@ func main() {
 }
 
 func sendData(data string) {
-	sck, err := net.Dial("tcp", "127.0.0.1:9999")
+	sck, err := net.Dial("tcp", "127.0.0.1:9998")
 	if err != nil {
 		log.Fatalln(err)
 	}
 
 	sck.Write([]byte(data))
-	// buf := make([]byte, 1024)
-
-	// _, err = sck.Read(buf)
-	// if err != nil {
-	// 	log.Fatalln(err)
-	// }
+	fmt.Println("Sent", data)
 
 	sck.Close()
 }
