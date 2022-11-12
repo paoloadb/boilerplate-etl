@@ -39,12 +39,16 @@ func main() {
 }
 
 func relayToLoader(data []byte, len int) {
-
-	destIpc, err := net.Dial("tcp", "127.0.0.1:9999")
-	if err != nil {
-		log.Fatalln(err)
+	for {
+		destIpc, err := net.Dial("tcp", "127.0.0.1:9999")
+		if err != nil {
+			log.Println(err)
+		} else {
+			
+		destIpc.Write(data)
+		fmt.Println("Relaying",string(data[:len]))
+			break
+		}
 	}
 
-	destIpc.Write(data)
-	fmt.Println("Relaying",string(data[:len]))
 }
